@@ -16,5 +16,9 @@ reorder-python-imports==3.0.1
 tox==3.24.5
 
 
+# Production only
+gunicorn==20.1.0
+
+
 # Label generator
 git+https://github.com/davidfischer/mtg-printable-set-label-generator.git
