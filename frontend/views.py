@@ -1,9 +1,11 @@
 import logging
+import os
 import subprocess
 import tempfile
 import zipfile
 from pathlib import Path
 
+from django.conf import settings
 from django.http import FileResponse
 from django.shortcuts import render
 
@@ -30,7 +32,12 @@ def homepage(request):
                         "--output-dir",
                         tempdir,
                         *sets,
-                    ]
+                    ],
+                    env={
+                        "FONTCONFIG_PATH": settings.FONTCONFIG_PATH,
+                        "PATH": os.environ["PATH"],
+                    },
+                    cwd=str(settings.BASE_DIR),
                 )
                 zipfile_path = Path(tempdir) / "labels.zip"
                 with zipfile.ZipFile(zipfile_path, "w") as myzip:

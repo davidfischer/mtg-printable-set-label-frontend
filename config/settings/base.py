@@ -210,3 +210,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 # --------------------------------------------------------------------------
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+
+# Used to setup font access
+FONTCONFIG_PATH = BASE_DIR / "fontconfig"
