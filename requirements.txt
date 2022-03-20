@@ -21,4 +21,4 @@ gunicorn==20.1.0
 
 
 # Label generator
-git+https://github.com/davidfischer/mtg-printable-set-label-generator.git
+git+https://github.com/davidfischer/mtg-printable-set-label-generator.git@v0.0.2
