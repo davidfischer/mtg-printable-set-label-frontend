@@ -42,7 +42,7 @@ class LabelGeneratorForm(forms.Form):
         kwargs["initial"].update(
             {
                 "paper_size": "letter",
-                "sets": ["mh1", "mh2", "lea"],
+                "sets": default_sets,
             }
         )
 
