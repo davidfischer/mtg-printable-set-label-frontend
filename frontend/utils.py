@@ -41,6 +41,10 @@ def get_grouped_sets():
             # Skip digital only sets
             continue
 
+        if exp["set_type"] in ("memorabilia", "token", "vanguard", "promo"):
+            # Skip tokens and others sets that don't make sense
+            continue
+
         # Skip sets released after today
         # This is important because sets with a failing SVG URL
         # will cause the whole process to break

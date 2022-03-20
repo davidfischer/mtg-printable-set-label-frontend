@@ -33,6 +33,7 @@ class LabelGeneratorForm(forms.Form):
                 "masters",
                 "commander",
                 "draft innovation",
+                "starter",
             ):
                 default_sets.extend([code for code, exp in set_list])
 
@@ -62,6 +63,12 @@ class LabelGeneratorForm(forms.Form):
             layout.Fieldset(
                 "",
                 layout.Field("sets", template="frontend/includes/sets-field.html"),
+                layout.HTML(
+                    "<ul class='list-inline small'>"
+                    "<li class='list-inline-item'><a class='quick-update' href='#' data-selector='[data-set-code]' data-target='.sets-columns input'>Select all</a></li>"
+                    "<li class='list-inline-item'><a class='quick-update' href='#' data-selector='[data-set-none]' data-target='.sets-columns input'>Select none</a></li>"
+                    "</ul>"
+                ),
                 "paper_size",
                 css_class="my-3",
             ),

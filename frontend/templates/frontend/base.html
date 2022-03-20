@@ -84,8 +84,27 @@
     <script>
       // Disable the button on submit
       $("form").on("submit", function () {
+        var original = $("input[type='submit']").prop("value");
         $("input[type='submit']").prop({"disabled": true});
         $("input[type='submit']").prop("value", "Generating...");
+
+        setTimeout(function () {
+          $("input[type='submit']").prop({"disabled": false});
+          $("input[type='submit']").prop("value", original);
+        }, 1000 * 10);
+      });
+
+      $(".quick-update").on("click", function () {
+        var selector = $(this).attr("data-selector");
+        var target = $(this).attr("data-target");
+
+        // Uncheck everything
+        $(target).attr("checked", false);
+
+        // Check matching
+        $(target + selector).attr("checked", true);
+
+        return false;
       });
     </script>
   </body>
