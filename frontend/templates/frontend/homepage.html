@@ -1,0 +1,17 @@
+{% extends "frontend/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Magic: the Gathering printable label generator{% endblock title %}
+{% block headline %}Magic: the Gathering Printable Label Generator{% endblock headline %}
+{% block subhead %}Generate printable set labels for Magic: the Gathering (MTG) in order to organize a collection of cards.{% endblock subhead %}
+
+
+{% block content %}
+
+{% if message %}
+<div class="alert alert-danger" role="alert">{{ message }}</div>
+{% endif %}
+
+{% crispy form form.helper %}
+{% endblock content %}

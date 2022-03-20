@@ -1,0 +1,53 @@
+{% load crispy_forms_field %}
+{% load crispy_forms_filters %}
+{% load l10n %}
+
+
+{# Adapted from crispy_forms/templates/bootstrap4/field.html #}
+{#   and  crispy_forms/templates/bootstrap4/layout/checkboxselectmultiple.html #}
+
+
+<{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if not field|is_checkbox %}form-group{% if 'form-horizontal' in form_class %} row{% endif %}{% else %}{%if use_custom_control%}custom-control custom-checkbox{% else %}form-check{% endif %}{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+    {% if field.label and not field|is_checkbox and form_show_labels %}
+    {# not field|is_radioselect in row below can be removed once Django 3.2 is no longer supported #}
+    <label {% if field.id_for_label and not field|is_radioselect %}for="{{ field.id_for_label }}" {% endif %}class="{% if 'form-horizontal' in form_class %}col-form-label {% endif %}{{ label_class }}{% if field.field.required %} requiredField{% endif %}">
+            {{ field.label|safe }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
+    </label>
+    {% endif %}
+
+    <div {% if field_class %}class="{{ field_class }}"{% endif %}{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
+
+        <div class="sets-columns">
+        {% for group, options, index in field|optgroups %}
+            <div class="optgroup">
+            {% if group %}<strong>{{ group|title }}</strong>{% endif %}
+            {% for option in options %}
+                {% with setobj=option.label %}
+                    <div class="{%if use_custom_control%}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
+                        <input type="checkbox" class="{%if use_custom_control%}custom-control-input{% else %}form-check-input{% endif %}{% if field.errors %} is-invalid{% endif %}" name="{{ field.html_name }}" value="{{ option.value|unlocalize }}" {% include "bootstrap4/layout/attrs.html" with widget=option %} data-set-type="{{ setobj.set_type }}" data-card-count="{{ setobj.card_count }}" data-set-code="{{ setobj.code }}">
+                        <label class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}" for="{{ option.attrs.id }}">
+                            <span>{{ setobj.name }}</span>
+                            <img src="{{ setobj.icon_svg_uri }}" style="height: 0.75rem;">
+                        </label>
+                        {% if field.errors and forloop.last and not inline_class and forloop.parentloop.last %}
+                            {% include 'bootstrap4/layout/field_errors_block.html' %}
+                        {% endif %}
+                    </div>
+                {% endwith %}
+            {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+
+        {% if field.errors and inline_class %}
+        <div class="w-100 {%if use_custom_control%}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
+            {# the following input is only meant to allow boostrap to render the error message as it has to be after an invalid input. As the input has no name, no data will be sent. #}
+            <input type="checkbox" class="custom-control-input {% if field.errors %}is-invalid{%endif%}">
+            {% include 'bootstrap4/layout/field_errors_block.html' %}
+        </div>
+        {% endif %}
+
+        {% include 'bootstrap4/layout/help_text.html' %}
+    </div>
+
+</{% if tag %}{{ tag }}{% else %}div{% endif %}>
