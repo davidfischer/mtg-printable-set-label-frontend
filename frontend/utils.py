@@ -16,6 +16,8 @@ SCRYFALL_SETS_API_URL = "https://api.scryfall.com/sets"
 SCRYFALL_SETS_CACHE_KEY = "scryfall-sets"
 SCRYFALL_SETS_CACHE_DURATION = 60 * 60 * 8
 
+EXCLUDED_SETS = ("scd",)  # Starter Commander Decks - set has an icon issue
+
 
 def get_scryfall_set_data():
     cached_result = cache.get(SCRYFALL_SETS_CACHE_KEY)
@@ -43,6 +45,9 @@ def get_grouped_sets():
 
         if exp["set_type"] in ("memorabilia", "token", "vanguard", "promo"):
             # Skip tokens and others sets that don't make sense
+            continue
+
+        if exp["code"] in EXCLUDED_SETS:
             continue
 
         # Skip sets released after today
