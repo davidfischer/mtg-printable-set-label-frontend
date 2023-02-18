@@ -70,6 +70,14 @@
           <div class="col text-center">
             <p><small>This label generator is unofficial Fan Content permitted under the <a href="https://company.wizards.com/fancontentpolicy">Wizards of the Coast Fan Content Policy</a>.</small></p>
             <p><small>It uses set information provided by <a href="https://scryfall.com/">Scryfall</a> in accordance with their <a href="https://scryfall.com/docs/api#use-of-scryfall-data">guidelines</a>.</small></p>
+
+            {% if APP_REVISION %}
+              <p>
+                <small>
+                  <a href="https://github.com/davidfischer/mtg-printable-set-label-frontend/commit/{{ APP_REVISION }}">Version: {{ APP_REVISION }}</a>
+                </small>
+              </p>
+            {% endif %}
           </div>
         </div>
       </div>
