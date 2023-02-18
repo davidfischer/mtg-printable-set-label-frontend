@@ -23,6 +23,11 @@ COPY . /code/
 
 RUN python manage.py collectstatic --noinput
 
+# Run the container unprivileged
+RUN addgroup www && useradd -g www www
+RUN chown -R www:www /code
+USER www
+
 # Output information about the build
 # These files can be read by the application
 RUN git log -n 1 --pretty=format:"%h" > GIT_COMMIT
