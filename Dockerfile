@@ -23,6 +23,11 @@ COPY . /code/
 
 RUN python manage.py collectstatic --noinput
 
+# Output information about the build
+# These files can be read by the application
+RUN git log -n 1 --pretty=format:"%h" > GIT_COMMIT
+RUN date -u +'%Y-%m-%dT%H:%M:%SZ' > BUILD_DATE
+
 EXPOSE 8000
 
 # Increase the timeout since these PDFs take a long time to generate

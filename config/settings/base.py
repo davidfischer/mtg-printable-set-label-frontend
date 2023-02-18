@@ -67,6 +67,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
+                "config.context_processors.settings_processor",
             ],
         },
     },
@@ -214,3 +215,11 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Used to setup font access
 FONTCONFIG_PATH = BASE_DIR / "fontconfig"
+
+
+# App specific configuration
+# --------------------------------------------------------------------------
+APP_REVISION = None
+if (BASE_DIR / "GIT_COMMIT").exists():
+    with open(BASE_DIR / "GIT_COMMIT", encoding="utf-8") as fd:
+        APP_REVISION = fd.read().strip()
