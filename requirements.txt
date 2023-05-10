@@ -1,19 +1,20 @@
 # Django itself
-django<3.3,>=3.2
+django==4.2.1
 
 # Helpers
-django-environ==0.8.1
-whitenoise==6.0.0
-django-crispy-forms==1.14.0
+django-environ==0.10.0
+whitenoise==6.4.0
+django-crispy-forms==2.0
+crispy_bootstrap4==2022.1
 requests>=2,<3
 
 
 # Used in development only
-django-debug-toolbar==3.2.4
-pre-commit==2.17.0
-black==22.3.0
-reorder-python-imports==3.0.1
-tox==3.24.5
+django-debug-toolbar==4.0.0
+pre-commit==3.3.1
+black==23.3.0
+reorder-python-imports==3.9.0
+tox==4.5.1
 
 
 # Production only
@@ -21,4 +22,5 @@ gunicorn==20.1.0
 
 
 # Label generator
+# git+https://github.com/gofrolist/mtg-printable-set-label-generator.git@main
 git+https://github.com/davidfischer/mtg-printable-set-label-generator.git@v0.0.3
